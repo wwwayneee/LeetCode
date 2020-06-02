@@ -1,15 +1,28 @@
-//
-//  main.c
-//  27
-//
-//  Created by 张宇轩 on 2020/6/1.
-//  Copyright © 2020 张宇轩. All rights reserved.
-//
+int* plusOne(int* digits, int digitsSize, int* returnSize){
+	int num = 0;
+	int carry_cnt = 0;
+	for (int i = 0; i < digitsSize; i++)
+		num += digits[i] * pow(10, digitsSize - 1 - i);
 
-#include <stdio.h>
+	for (int i = 0; i < digitsSize; i++) 
+		if (digits[i] == 9)
+			carry_cnt++;
+	
+	if (carry_cnt == digitsSize) {
+		//need to carry
+		* returnSize = digitsSize + 1;
+    	int * result = (int *)malloc(sizeof(int) * (digitsSize + 1));
+	}
+	else {
+		* returnSize = digitsSize;
+    	int * result = (int *)malloc(sizeof(int) * digitsSize);
+	}
 
-int main(int argc, const char * argv[]) {
-	// insert code here...
-	printf("Hello, World!\n");
-	return 0;
+	num++;
+	for (int i = 0; i < digitsSize; i++) {
+		result[i] = (int)(num / pow(10, digitsSize - 1 - i));
+        num -= result[i] * pow(10, digitsSize - 1 - i);
+    }
+	
+	return result;
 }
